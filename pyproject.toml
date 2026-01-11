@@ -1,0 +1,11 @@
+[project]
+name = "snipe007-ai-test"
+version = "0.1.0"
+description = "Vision LLM Benchmark for kitchen analysis using OpenRouter"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.0.0",
+    "pyyaml>=6.0",
+    "pillow>=10.0.0",
+    "python-dotenv>=1.0.0",
+]

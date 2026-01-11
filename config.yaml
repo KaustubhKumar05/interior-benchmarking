@@ -1,0 +1,27 @@
+# Vision LLM Benchmark Configuration
+
+# List of models to test from OpenRouter
+models_to_test:
+  - qwen/qwen3-vl-30b-a3b-instruct
+  - mistralai/ministral-14b-2512
+  - allenai/molmo-2-8b:free
+  - qwen/qwen3-vl-8b-instruct
+  - mistralai/ministral-3b-2512
+  - openai/gpt-5.2
+  
+
+# OpenRouter API configuration
+openrouter:
+  base_url: https://openrouter.ai/api/v1
+  timeout: 60
+
+# Scoring weights for different components
+scoring_weights:
+  base: 0.15
+  wall: 0.15
+  tall: 0.15
+  loft: 0.15
+  dado: 0.05
+  floor: 0.05
+  colors: 0.20
+  handles: 0.10
