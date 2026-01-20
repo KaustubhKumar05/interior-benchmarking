@@ -7,6 +7,8 @@ models_to_test:
   - qwen/qwen3-vl-30b-a3b-instruct
   - openai/gpt-5.2
 
+prompt_file_name: base
+
 # OpenRouter API configuration
 openrouter:
   base_url: https://openrouter.ai/api/v1

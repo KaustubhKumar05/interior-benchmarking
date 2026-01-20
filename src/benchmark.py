@@ -54,7 +54,7 @@ class VisionLLMBenchmark:
         self.judge = KitchenAnalysisJudge(weights=scoring_weights)
 
         # Load prompts
-        self.system_prompt, self.user_prompt = self.load_prompts()
+        self.system_prompt, self.user_prompt = self.load_prompts(self.config)
 
         # Get models to test
         self.models = self.config.get("models_to_test", [])
@@ -68,16 +68,18 @@ class VisionLLMBenchmark:
 
         print(f"Results will be saved to: {self.results_dir}")
 
-    def load_prompts(self) -> tuple[str, str]:
+    def load_prompts(self, config) -> tuple[str, str]:
         """
-        Load system and user prompts from Prompt.txt.
+        Load system and user prompts from the prompts dir.
 
         Returns:
             Tuple of (system_prompt, user_prompt)
         """
-        prompt_file = Path("Prompt.txt")
+        prompt_file = Path(f"prompts/{config.prompt_file_name}.txt")
         if not prompt_file.exists():
-            raise FileNotFoundError("Prompt.txt not found in workspace root")
+            raise FileNotFoundError(
+                f"{config.prompt_file_name}.txt not found in prompts directory"
+            )
 
         with open(prompt_file, "r", encoding="utf-8") as f:
             content = f.read()
@@ -85,7 +87,7 @@ class VisionLLMBenchmark:
         # Parse the simplified prompt file
         if "SYSTEM_PROMPT:" not in content or "USER_PROMPT:" not in content:
             raise ValueError(
-                "Prompt.txt must contain SYSTEM_PROMPT: and USER_PROMPT: sections"
+                "Prompt file must contain SYSTEM_PROMPT: and USER_PROMPT: sections"
             )
 
         # Extract system prompt
