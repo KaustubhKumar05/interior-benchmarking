@@ -505,8 +505,60 @@ class VisionLLMOrchestrator:
         print(f"Report saved to: {report_path}")
         print(f"Results saved to: {results_dir}")
 
+    def _generate_single_ground_truth(
+        self, image_file: Path, benchmark_model: str, replace_all: bool
+    ) -> Dict[str, Any]:
+        """
+        Generate ground truth for a single image file.
+        
+        Args:
+            image_file: Path to the image file
+            benchmark_model: Model to use for generation
+            replace_all: Whether to replace existing files
+            
+        Returns:
+            Dictionary with status and details
+        """
+        samples_dir = Path("Samples")
+        image_name = image_file.stem
+        ground_truth_path = samples_dir / f"{image_name}.json"
+
+        # Check if we should skip this sample
+        if ground_truth_path.exists() and not replace_all:
+            return {
+                "name": image_name,
+                "status": "skipped",
+                "message": "ground truth already exists",
+            }
+
+        try:
+            # Generate ground truth
+            parsed_response = generate_ground_truth_for_sample(
+                self.client,
+                benchmark_model,
+                image_file,
+                self.system_prompt,
+                self.user_prompt,
+            )
+
+            # Save ground truth file
+            save_ground_truth_file(parsed_response, ground_truth_path)
+            
+            return {
+                "name": image_name,
+                "status": "success",
+                "message": "generated successfully",
+            }
+
+        except Exception as e:
+            return {
+                "name": image_name,
+                "status": "error",
+                "message": str(e),
+            }
+
     def generate_ground_truth(self):
-        """Generate or regenerate ground truth files using the benchmark model."""
+        """Generate or regenerate ground truth files using the benchmark model (parallelized)."""
         print("=" * 60)
         print("Ground Truth Generation")
         print("=" * 60)
@@ -525,7 +577,6 @@ class VisionLLMOrchestrator:
 
         print(f"Using model: {benchmark_model}")
         print(f"Replace all: {replace_all}")
-        print()
 
         # Discover samples
         samples_dir = Path("Samples")
@@ -543,41 +594,44 @@ class VisionLLMOrchestrator:
 
         print(f"Found {len(image_files)} images")
 
-        processed = 0
-        skipped = 0
-        errors = 0
+        # Get max concurrent requests from config
+        openrouter_config = self.config.get("openrouter", {})
+        max_workers = openrouter_config.get("max_concurrent_requests", 5)
+        
+        print(f"Processing with {max_workers} concurrent requests...")
+        print()
 
-        for image_file in image_files:
-            image_name = image_file.stem
-            ground_truth_path = samples_dir / f"{image_name}.json"
+        results = []
 
-            # Check if we should skip this sample
-            if ground_truth_path.exists() and not replace_all:
-                print(f"⏭️  Skipping {image_name} (ground truth already exists)")
-                skipped += 1
-                continue
+        # Use ThreadPoolExecutor for parallel generation
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            future_to_image = {
+                executor.submit(self._generate_single_ground_truth, image_file, benchmark_model, replace_all): image_file
+                for image_file in image_files
+            }
 
-            try:
-                print(f"🔄 Generating ground truth for {image_name}...")
+            # Collect results as they complete
+            for future in as_completed(future_to_image):
+                result = future.result()
+                results.append(result)
                 
-                # Generate ground truth
-                parsed_response = generate_ground_truth_for_sample(
-                    self.client,
-                    benchmark_model,
-                    image_file,
-                    self.system_prompt,
-                    self.user_prompt,
-                )
-
-                # Save ground truth file
-                save_ground_truth_file(parsed_response, ground_truth_path)
+                # Print status
+                name = result["name"]
+                status = result["status"]
+                message = result["message"]
                 
-                print(f"✅ Generated ground truth for {image_name}")
-                processed += 1
+                if status == "success":
+                    print(f"✅ {name}: {message}")
+                elif status == "skipped":
+                    print(f"⏭️  {name}: {message}")
+                elif status == "error":
+                    print(f"❌ {name}: {message}")
 
-            except Exception as e:
-                print(f"❌ Error generating ground truth for {image_name}: {str(e)}")
-                errors += 1
+        # Count results
+        processed = sum(1 for r in results if r["status"] == "success")
+        skipped = sum(1 for r in results if r["status"] == "skipped")
+        errors = sum(1 for r in results if r["status"] == "error")
 
         print("\n" + "=" * 60)
         print("Ground Truth Generation Complete")
