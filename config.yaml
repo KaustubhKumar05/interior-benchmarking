@@ -4,13 +4,14 @@
 models_to_test:
   - qwen/qwen3-vl-8b-instruct
   - openai/gpt-5.2
+  - openai/gpt-4.1-mini
 
 # Model to use for generating ground truth (when regenerating ground truth files)
 benchmark_model: openai/gpt-5.2
 
 # Ground truth regeneration behavior
 ground_truth:
-  replace_all: false  # If true, replace all existing. If false, only create for missing ones
+  replace_all: true  # If true, replace all existing. If false, only create for missing ones
 
 prompt_file_name: base
 

@@ -1,0 +1,100 @@
+{
+    "base": {
+        "detected": true,
+        "finishFamily": "Acrylic",
+        "colors": [
+            {
+                "hex": "#6FAAC3",
+                "coverage": 90
+            },
+            {
+                "hex": "#1F1F1F",
+                "coverage": 10
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "edge_profile",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "wall": {
+        "detected": true,
+        "finishFamily": "Acrylic",
+        "colors": [
+            {
+                "hex": "#F4F4F2",
+                "coverage": 95
+            },
+            {
+                "hex": "#1F1F1F",
+                "coverage": 5
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "knob",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "tall": {
+        "detected": false,
+        "finishFamily": "Unknown",
+        "colors": [],
+        "handle": {
+            "detected": false,
+            "type": "unknown",
+            "finish": "unknown",
+            "hex": null
+        }
+    },
+    "loft": {
+        "detected": true,
+        "finishFamily": "Acrylic",
+        "colors": [
+            {
+                "hex": "#F4F4F2",
+                "coverage": 95
+            },
+            {
+                "hex": "#1F1F1F",
+                "coverage": 5
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "knob",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "dado": {
+        "detected": true,
+        "finishFamily": "Unknown",
+        "colors": [
+            {
+                "hex": "#F3F1ED",
+                "coverage": 100
+            }
+        ]
+    },
+    "floor": {
+        "detected": true,
+        "finishFamily": "Unknown",
+        "colors": [
+            {
+                "hex": "#E6E6E4",
+                "coverage": 100
+            }
+        ]
+    },
+    "ceilingLighting": {
+        "detected": false,
+        "type": "unknown",
+        "count": null,
+        "layout": "unknown",
+        "colorTemperature": "unknown"
+    }
+}

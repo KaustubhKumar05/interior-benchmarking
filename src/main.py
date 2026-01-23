@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
@@ -223,6 +224,84 @@ def score_and_save_result(
         "response_file": str(output_path),
         "success": True,
     }
+
+
+# ============================================================================
+# IMAGE PREPARATION FUNCTIONS
+# ============================================================================
+
+
+def prepare_samples(samples_dir: Path = Path("Samples")) -> None:
+    """
+    Rename and convert all images in the Samples directory to kitchen_<num>.jpg format.
+
+    Uses ffmpeg to convert images from any format to jpg.
+
+    Args:
+        samples_dir: Path to the samples directory
+    """
+    if not samples_dir.exists():
+        print(f"Samples directory not found: {samples_dir}")
+        return
+
+    image_extensions = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff", ".gif", ".heic"}
+    image_files = sorted(
+        [f for f in samples_dir.iterdir() if f.suffix.lower() in image_extensions]
+    )
+
+    if not image_files:
+        print("No images found in Samples directory")
+        return
+
+    print(f"Found {len(image_files)} images to process")
+
+    temp_dir = samples_dir / "_temp_convert"
+    temp_dir.mkdir(exist_ok=True)
+
+    converted_files = []
+    for image_file in image_files:
+        temp_path = temp_dir / f"{image_file.stem}.jpg"
+
+        try:
+            subprocess.run(
+                [
+                    "ffmpeg",
+                    "-y",
+                    "-i",
+                    str(image_file),
+                    "-q:v",
+                    "2",
+                    str(temp_path),
+                ],
+                check=True,
+                capture_output=True,
+            )
+            converted_files.append((image_file, temp_path))
+            print(f"✅ Converted {image_file.name}")
+        except subprocess.CalledProcessError as e:
+            print(f"❌ {image_file.name}: ffmpeg error - {e.stderr.decode()}")
+        except FileNotFoundError:
+            print("❌ ffmpeg not found. Please install ffmpeg.")
+            temp_dir.rmdir()
+            return
+
+    for image_file, _ in converted_files:
+        image_file.unlink()
+
+    for idx, (original_file, temp_path) in enumerate(converted_files, start=1):
+        new_name = f"kitchen_{idx:02d}.jpg"
+        new_path = samples_dir / new_name
+        temp_path.rename(new_path)
+        print(f"✅ {temp_path.name} -> {new_name}")
+
+        old_json = samples_dir / f"{original_file.stem}.json"
+        if old_json.exists():
+            new_json = samples_dir / f"kitchen_{idx:02d}.json"
+            old_json.rename(new_json)
+            print(f"✅ {old_json.name} -> {new_json.name}")
+
+    temp_dir.rmdir()
+    print("\nImage preparation complete!")
 
 
 # ============================================================================
@@ -656,9 +735,18 @@ def main():
         action="store_true",
         help="Generate ground truth files using benchmark model",
     )
+    parser.add_argument(
+        "--prepare-samples",
+        action="store_true",
+        help="Rename and convert images in Samples to kitchen_<num>.jpg format",
+    )
     args = parser.parse_args()
 
     try:
+        if args.prepare_samples:
+            prepare_samples()
+            return
+
         orchestrator = VisionLLMOrchestrator()
 
         if args.generate_ground_truth:

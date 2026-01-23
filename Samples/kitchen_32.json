@@ -1,0 +1,93 @@
+{
+    "base": {
+        "detected": true,
+        "finishFamily": "PU",
+        "colors": [
+            {
+                "hex": "#8A4B4A",
+                "coverage": 100
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "knob",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "wall": {
+        "detected": true,
+        "finishFamily": "PU",
+        "colors": [
+            {
+                "hex": "#8A4B4A",
+                "coverage": 100
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "knob",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "tall": {
+        "detected": true,
+        "finishFamily": "PU",
+        "colors": [
+            {
+                "hex": "#7E3F40",
+                "coverage": 100
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "knob",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "loft": {
+        "detected": true,
+        "finishFamily": "PU",
+        "colors": [
+            {
+                "hex": "#8A4B4A",
+                "coverage": 100
+            }
+        ],
+        "handle": {
+            "detected": true,
+            "type": "knob",
+            "finish": "matte_black",
+            "hex": "#1F1F1F"
+        }
+    },
+    "dado": {
+        "detected": true,
+        "finishFamily": "Tile",
+        "colors": [
+            {
+                "hex": "#F2F1EE",
+                "coverage": 100
+            }
+        ]
+    },
+    "floor": {
+        "detected": true,
+        "finishFamily": "Wood",
+        "colors": [
+            {
+                "hex": "#D8C6A8",
+                "coverage": 100
+            }
+        ]
+    },
+    "ceilingLighting": {
+        "detected": true,
+        "type": "pendant",
+        "count": 3,
+        "layout": "linear",
+        "colorTemperature": "warm_white"
+    }
+}

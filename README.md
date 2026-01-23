@@ -228,12 +228,21 @@ ground_truth:
   replace_all: false  # If true, regenerate all existing json files
                       # If false, only generate for samples without json output
 ```
+### Adding More Samples
+
+```bash
+python -m src.main --prepare-samples
+```
+Loops over all images in Samples/ (supports jpg, png, webp, bmp, tiff, gif, heic)
+Renames them to kitchen_01.jpg, kitchen_02.jpg, etc.
+Uses ffmpeg for jpg conversion
+Deletes the original file after successful conversion
 
 ### Generate Ground Truth Files
 
 ```bash
 # Generate ground truth for new samples (skip existing ones)
-uv run python -m src.main --generate-ground-truth
+python -m src.main --generate-ground-truth
 
 # To replace ALL existing ground truth files:
 # 1. Set replace_all: true in config.yaml
