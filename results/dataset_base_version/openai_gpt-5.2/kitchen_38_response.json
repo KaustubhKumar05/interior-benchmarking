@@ -1,0 +1,290 @@
+{
+  "sample": "kitchen_38",
+  "model": "openai/gpt-5.2",
+  "response": {
+    "base": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C4B6AD",
+          "coverage": 88
+        },
+        {
+          "hex": "#9BA0A4",
+          "coverage": 12
+        }
+      ],
+      "handle": {
+        "detected": true,
+        "type": "bar",
+        "finish": "brushed_steel",
+        "hex": "#B8BCC0"
+      }
+    },
+    "wall": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C4B6AD",
+          "coverage": 95
+        },
+        {
+          "hex": "#A7B3B8",
+          "coverage": 5
+        }
+      ],
+      "handle": {
+        "detected": true,
+        "type": "knob",
+        "finish": "chrome",
+        "hex": "#C7CCD0"
+      }
+    },
+    "tall": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C4B6AD",
+          "coverage": 90
+        },
+        {
+          "hex": "#F2E7D8",
+          "coverage": 10
+        }
+      ],
+      "handle": {
+        "detected": false,
+        "type": "unknown",
+        "finish": "unknown",
+        "hex": null
+      }
+    },
+    "loft": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C4B6AD",
+          "coverage": 97
+        },
+        {
+          "hex": "#A7B3B8",
+          "coverage": 3
+        }
+      ],
+      "handle": {
+        "detected": true,
+        "type": "knob",
+        "finish": "chrome",
+        "hex": "#C7CCD0"
+      }
+    },
+    "dado": {
+      "detected": true,
+      "finishFamily": "Tile",
+      "colors": [
+        {
+          "hex": "#CFD2CD",
+          "coverage": 100
+        }
+      ]
+    },
+    "floor": {
+      "detected": true,
+      "finishFamily": "Tile",
+      "colors": [
+        {
+          "hex": "#C8C8C2",
+          "coverage": 100
+        }
+      ]
+    },
+    "ceilingLighting": {
+      "detected": false,
+      "type": "unknown",
+      "count": null,
+      "layout": "unknown",
+      "colorTemperature": "unknown"
+    }
+  },
+  "ground_truth": {
+    "base": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C3B1AA",
+          "coverage": 90
+        },
+        {
+          "hex": "#9EA3A6",
+          "coverage": 10
+        }
+      ],
+      "handle": {
+        "detected": true,
+        "type": "bar",
+        "finish": "brushed_steel",
+        "hex": "#B7B8BA"
+      }
+    },
+    "wall": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C3B1AA",
+          "coverage": 95
+        },
+        {
+          "hex": "#BFC4C7",
+          "coverage": 5
+        }
+      ],
+      "handle": {
+        "detected": true,
+        "type": "knob",
+        "finish": "brushed_steel",
+        "hex": "#B7B8BA"
+      }
+    },
+    "tall": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C3B1AA",
+          "coverage": 80
+        },
+        {
+          "hex": "#E6E1DA",
+          "coverage": 20
+        }
+      ],
+      "handle": {
+        "detected": false,
+        "type": "unknown",
+        "finish": "unknown",
+        "hex": null
+      }
+    },
+    "loft": {
+      "detected": true,
+      "finishFamily": "Laminate",
+      "colors": [
+        {
+          "hex": "#C3B1AA",
+          "coverage": 95
+        },
+        {
+          "hex": "#BFC4C7",
+          "coverage": 5
+        }
+      ],
+      "handle": {
+        "detected": true,
+        "type": "knob",
+        "finish": "brushed_steel",
+        "hex": "#B7B8BA"
+      }
+    },
+    "dado": {
+      "detected": true,
+      "finishFamily": "Tile",
+      "colors": [
+        {
+          "hex": "#D5D2CB",
+          "coverage": 100
+        }
+      ]
+    },
+    "floor": {
+      "detected": true,
+      "finishFamily": "Tile",
+      "colors": [
+        {
+          "hex": "#D0D0CC",
+          "coverage": 100
+        }
+      ]
+    },
+    "ceilingLighting": {
+      "detected": false,
+      "type": "unknown",
+      "count": null,
+      "layout": "unknown",
+      "colorTemperature": "unknown"
+    }
+  },
+  "score": 0.6794832085985296,
+  "detailed_scores": {
+    "overall_score": 0.6794832085985296,
+    "component_scores": {
+      "base": {
+        "detected": 1.0,
+        "finishFamily": 1.0,
+        "colors": 0.9891285759450217,
+        "handle": 1.0,
+        "total": 0.9967385727835065
+      },
+      "wall": {
+        "detected": 1.0,
+        "finishFamily": 1.0,
+        "colors": 0.9910455304048821,
+        "handle": 0.7227560188114456,
+        "total": 0.9418648628837538
+      },
+      "tall": {
+        "detected": 1.0,
+        "finishFamily": 1.0,
+        "colors": 0.956202137093773,
+        "handle": 1.0,
+        "total": 0.9868606411281318
+      },
+      "loft": {
+        "detected": 1.0,
+        "finishFamily": 1.0,
+        "colors": 0.9850455304048822,
+        "handle": 0.7227560188114456,
+        "total": 0.9400648628837538
+      },
+      "dado": {
+        "detected": 1.0,
+        "finishFamily": 1.0,
+        "colors": 0.9932736973542946,
+        "handle": 1.0,
+        "total": 0.9979821092062884
+      },
+      "floor": {
+        "detected": 1.0,
+        "finishFamily": 1.0,
+        "colors": 0.9836508124228898,
+        "handle": 1.0,
+        "total": 0.995095243726867
+      },
+      "ceilingLighting": {
+        "detected": 1.0,
+        "type": 1.0,
+        "count": 1.0,
+        "layout": 1.0,
+        "colorTemperature": 1.0,
+        "total": 1.0
+      },
+      "baseUnitCoverage": {
+        "total": 1.0
+      },
+      "wallUnitCoverage": {
+        "total": 1.0
+      }
+    }
+  },
+  "usage": {
+    "prompt_tokens": 2674,
+    "completion_tokens": 1580,
+    "total_tokens": 4254
+  },
+  "cost": 0.0231707
+}
